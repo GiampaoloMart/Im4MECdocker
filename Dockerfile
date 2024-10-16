@@ -1,5 +1,5 @@
 # Usa un'immagine base micromamba
-FROM mambaorg/micromamba:1.5.8-2-ubuntu24.04
+FROM mambaorg/micromamba:2-ubuntu24.04
 
 # Installa utilità di base
 RUN apt-get update && \
