@@ -1,10 +1,10 @@
 # Usa un'immagine base micromamba
-FROM mambaorg/micromamba:1.5.8-lunar
+FROM mambaorg/micromamba:1.5.8-2-ubuntu24.04
 
 # Installa utilità di base
-#RUN apt-get update && \
-#    apt-get install -y wget git bzip2 && \
-#    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y wget git bzip2 && \
+    rm -rf /var/lib/apt/lists/*
 
 # Installa Miniconda
 #ENV PATH="/opt/conda/bin:$PATH"
