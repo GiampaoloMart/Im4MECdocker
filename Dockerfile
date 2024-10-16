@@ -1,8 +1,11 @@
 # Usa un'immagine base micromamba
 FROM mambaorg/micromamba:ubuntu22.04
 
+# Aggiungi il percorso di micromamba alla variabile PATH
+ENV PATH /opt/conda/bin:$PATH
+
 # Installa Git dal canale conda-forge
-RUN micromamba install -c conda-forge git -y
+RUN micromamba install -c conda-forge git --yes
 
 # Clona il repository di im4MEC da GitHub
 RUN git clone https://github.com/AIRMEC/im4MEC.git /im4MEC
@@ -18,4 +21,3 @@ SHELL ["micromamba", "run", "--prefix", "/opt/conda_env", "/bin/bash", "-c"]
 
 # Avvia una shell interattiva
 CMD ["/bin/bash"]
-
