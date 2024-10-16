@@ -7,8 +7,14 @@ ENV PATH /opt/conda/bin:$PATH
 # Installa Git dal canale conda-forge
 RUN micromamba install -c conda-forge git --yes
 
-# Clona il repository di im4MEC da GitHub
+# Clona il repository di im4MEC da GitHub come root
 RUN git clone https://github.com/AIRMEC/im4MEC.git /im4MEC
+
+# Cambia i permessi della cartella
+RUN chown -R $MAMBA_USER /im4MEC
+
+# Cambia utente
+USER $MAMBA_USER
 
 # Imposta la directory di lavoro
 WORKDIR /im4MEC
