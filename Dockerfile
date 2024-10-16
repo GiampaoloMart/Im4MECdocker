@@ -14,7 +14,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     conda update -y conda
 
 # Clona il repository di im4MEC da GitHub
-RUN git clone https://github.com/tuo-username/im4MEC.git /im4MEC
+RUN git clone https://github.com/AIRMEC/im4MEC.git /im4MEC
 
 # Imposta la directory di lavoro
 WORKDIR /im4MEC
