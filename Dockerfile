@@ -1,5 +1,5 @@
 # Usa un'immagine base micromamba
-FROM mambaorg/micromamba::ubuntu22.04
+FROM mambaorg/micromamba:ubuntu22.04
 
 # Installa Git dal canale conda-forge
 RUN micromamba install -c conda-forge git -y
