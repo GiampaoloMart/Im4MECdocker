@@ -2,9 +2,11 @@
 FROM mambaorg/micromamba:2-ubuntu24.04
 
 # Installa utilità di base
-RUN apt-get update && \
+#RUN apt-get update && \
     apt-get install -y wget git bzip2 && \
     rm -rf /var/lib/apt/lists/*
+#Installa git   
+RUN micromamba install git -y
 
 # Installa Miniconda
 #ENV PATH="/opt/conda/bin:$PATH"
