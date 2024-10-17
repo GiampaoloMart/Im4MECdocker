@@ -1,5 +1,5 @@
 # Usa un'immagine base micromamba
-FROM mambaorg/micromamba:ubuntu22.04
+FROM mambaorg/micromamba:ubuntu24.04
 
 # Aggiungi il percorso di micromamba alla variabile PATH
 ENV PATH /opt/conda/bin:$PATH
@@ -22,15 +22,21 @@ USER $MAMBA_USER
 # Imposta la directory di lavoro
 WORKDIR /im4MEC
 
-# Verifica l'esistenza del file environment.yml
-RUN ls -l environment.yml || echo "environment.yml non trovato"
-
 # Crea l'ambiente Conda utilizzando environment.yml
 RUN micromamba env create -f environment.yml && \
     micromamba clean --all --yes
 
+# Nome dell'ambiente (assumi che sia 'im4mec')
+ENV ENV_NAME=im4mec
+
+# Attiva l'ambiente
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
+
 # Configura la shell per attivare l'ambiente conda
-SHELL ["micromamba", "run", "-n", "base", "/bin/bash", "-c"]
+SHELL ["micromamba", "run", "-n", "$ENV_NAME", "/bin/bash", "-c"]
+
+# Imposta l'attivazione dell'ambiente per quando il container viene eseguito
+ENTRYPOINT ["/usr/local/bin/_entrypoint.sh", "micromamba", "run", "-n", "$ENV_NAME", "--"]
 
 # Avvia una shell interattiva
 CMD ["/bin/bash"]
