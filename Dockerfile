@@ -4,6 +4,9 @@ FROM mambaorg/micromamba:ubuntu22.04
 # Aggiungi il percorso di micromamba alla variabile PATH
 ENV PATH /opt/conda/bin:$PATH
 
+# Passa temporaneamente all'utente root
+USER root
+
 # Installa Git dal canale conda-forge
 RUN micromamba install -c conda-forge git --yes
 
@@ -11,9 +14,9 @@ RUN micromamba install -c conda-forge git --yes
 RUN git clone https://github.com/AIRMEC/im4MEC.git /im4MEC
 
 # Cambia i permessi della cartella
-RUN chown -R $MAMBA_USER /im4MEC
+RUN chown -R $MAMBA_USER:$MAMBA_USER /im4MEC
 
-# Cambia utente
+# Torna all'utente non-root
 USER $MAMBA_USER
 
 # Imposta la directory di lavoro
