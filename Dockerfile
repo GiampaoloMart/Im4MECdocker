@@ -22,11 +22,15 @@ USER $MAMBA_USER
 # Imposta la directory di lavoro
 WORKDIR /im4MEC
 
+# Verifica l'esistenza del file environment.yml
+RUN ls -l environment.yml || echo "environment.yml non trovato"
+
 # Crea l'ambiente Conda utilizzando environment.yml
-RUN micromamba env create --prefix /opt/conda_env -f environment.yml && micromamba clean -a -y
+RUN micromamba env create -f environment.yml && \
+    micromamba clean --all --yes
 
 # Configura la shell per attivare l'ambiente conda
-SHELL ["micromamba", "run", "--prefix", "/opt/conda_env", "/bin/bash", "-c"]
+SHELL ["micromamba", "run", "-n", "base", "/bin/bash", "-c"]
 
 # Avvia una shell interattiva
 CMD ["/bin/bash"]
